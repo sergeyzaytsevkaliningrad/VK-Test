@@ -5,15 +5,11 @@
 //  Created by Сергей Зайцев on 10.05.2023.
 //
 
-import SwiftUI
+//import SwiftUI
+import Foundation
 
-//struct Virus: View {
-//
-//
-//}
-
-//struct Virus_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Virus()
-//    }
-//}
+struct Virus {
+    
+    var virus: Array = [0,0,0,0,0,0,0,0]
+    
+}

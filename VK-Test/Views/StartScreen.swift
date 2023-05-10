@@ -9,12 +9,18 @@ import SwiftUI
 
 struct StartScreen: View {
     
-    var subjectsCount: Int = 100
-    var infectedCount: Int = 1
-    var timeCount: Int = 1
+    @State var subjectsCount: Int = 100
+    @State var infectedCount: Int = 1
+    @State var timeCount: Int = 1
     
     private var subjects: [Subjects] = []
 //    private var indexesForReload: [Int] = []
+    
+    static var infected: NumberFormatter {
+            let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = .zero
+            return formatter
+        }
     
     var body: some View {
         NavigationView {
@@ -40,14 +46,14 @@ struct StartScreen: View {
                             
                             Spacer()
                             
-                            Text("\(subjectsCount)")
+                            TextField("", value: $subjectsCount, formatter: StartScreen.infected)
+                            //                            Text("\(subjectsCount)")
                                 .font(.title3)
                                 .bold()
-                                .multilineTextAlignment(.leading)
                                 .foregroundColor(.white)
                                 .padding()
                             
-                        }.padding()
+                        }
                         .frame(width: scaleScreen(343),height: scaleScreen(80))
                             .background(Color.backGroundGradient)
                             .cornerRadius(30)//Color.purple)
@@ -105,7 +111,7 @@ struct StartScreen: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: Simulator()){
+                NavigationLink(destination: Simulator(subjectsCount: $subjectsCount, infectedCount: $infectedCount, timeCount: $timeCount)){
                         Text("Начать моделирование")
                             .font(.title3)
                             .bold()

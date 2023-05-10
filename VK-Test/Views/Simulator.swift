@@ -11,6 +11,14 @@ struct Simulator: View {
     
     @Environment (\.dismiss) var dismiss
     
+    var subject = Subjects()
+    
+    @Binding var subjectsCount: Int
+    @Binding var infectedCount: Int
+    @Binding var timeCount: Int
+    
+    @State var infected: Bool = false
+    
     var body: some View {
         VStack{
             
@@ -78,7 +86,7 @@ struct Simulator: View {
             }.padding()
             
             Button {
-               dismiss()
+                dismiss()
             } label: {
                 
                 HStack{
@@ -97,6 +105,19 @@ struct Simulator: View {
             
             ScrollView{
                 
+                ForEach(1..<subjectsCount + 1){ _ in
+                        
+                        
+                        Button {
+                            self.infected.toggle()
+                        } label: {
+                            Image(systemName: infected ? "person" : "person.fill")
+                                .resizable()
+                                .frame(width: scaleScreen(70),height: scaleScreen(70))
+                                .padding()
+                        }
+                        
+                    }
             }.frame(width: scaleScreen(334))
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(10)
@@ -106,13 +127,9 @@ struct Simulator: View {
     }
 }
 
-struct Simulator_Previews: PreviewProvider {
-    static var previews: some View {
-        Simulator()
-    }
-}
+//struct Simulator_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Simulator(subjectsCount: <#Binding<Int>#>, infectedCount: <#Binding<Int>#>, timeCount: <#Binding<Int>#>)
+//    }
+//}
 
-extension Simulator{
-    
-    
-}
